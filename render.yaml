@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: harborwatch-trio-demo
+    env: node
+    plan: free
+    autoDeploy: true
+    buildCommand: npm install
+    startCommand: node server.mjs
+    envVars:
+      - key: NODE_VERSION
+        value: 22.3.0
+      - key: HOST
+        value: 0.0.0.0
+      - key: TRIO_BASE_URL
+        value: https://trio.machinefi.com
+      - key: TRIO_API_KEY
+        sync: false

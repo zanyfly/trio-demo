@@ -34,7 +34,7 @@ node server.mjs
 3. Open:
 
 ```text
-http://localhost:8787
+http://127.0.0.1:8787
 ```
 
 ## Environment variables
@@ -44,9 +44,29 @@ http://localhost:8787
 - `PORT` (optional, defaults to `8787`)
 - `HOST` (optional, defaults to `127.0.0.1`)
 
+## Deploy to Render (Free)
+
+This repo includes `render.yaml` for one-click Blueprint deploy.
+
+1. Push this project to GitHub.
+2. In Render, choose **New +** -> **Blueprint**.
+3. Connect your GitHub repo and deploy.
+4. In Render dashboard, set secret env var:
+   - `TRIO_API_KEY=your_real_trio_key`
+5. Confirm service env vars:
+   - `HOST=0.0.0.0`
+   - `TRIO_BASE_URL=https://trio.machinefi.com`
+6. Open and test:
+   - `https://<your-render-domain>/api/health`
+
+### Free plan notes
+
+- Free web services may spin down after inactivity.
+- First request after idle can be slower (cold start).
+- For live demo reliability, open the site a few minutes before presenting.
+
 ## Notes for demo
 
 - Trio monitor jobs auto-stop after ~10 minutes.
 - Trio limits active concurrent jobs (usually 10 max).
 - Conditions should be yes/no questions for reliable results.
-# trio-demo
