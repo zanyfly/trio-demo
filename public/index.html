@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HarborWatch AI | Trio Hackathon Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Sora:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="background"></div>
+    <main class="layout">
+      <section class="hero card entrance">
+        <p class="eyebrow">Trio API Demo</p>
+        <h1>HarborWatch AI</h1>
+        <p class="subtitle">
+          Monitor YouTube Live streams for marine and wildlife activity using real-time vision checks.
+        </p>
+        <div class="hero-note">
+          <span>Built for a 5-minute internal hackathon demo</span>
+          <span>Monitors auto-stop after 10 minutes</span>
+        </div>
+      </section>
+
+      <section class="controls card entrance delay-1">
+        <h2>1) Configure Stream</h2>
+        <label for="streamUrl">YouTube live URL</label>
+        <input id="streamUrl" type="url" placeholder="https://www.youtube.com/watch?v=..." />
+
+        <div class="inline-actions">
+          <button id="validateBtn" class="secondary">Validate Stream</button>
+          <button id="prepareBtn" class="secondary">Prepare Preview</button>
+        </div>
+
+        <h2>2) Select Conditions</h2>
+        <div class="condition-grid">
+          <button class="chip active" data-condition="Is there at least one ship visible in the frame?">
+            Ships
+          </button>
+          <button class="chip active" data-condition="Is there at least one bird visible in the frame?">
+            Birds
+          </button>
+          <button class="chip" data-condition="Are there rough waves visible in the scene?">
+            Rough Waves
+          </button>
+          <button class="chip" data-condition="Is there fog reducing visibility in the frame?">
+            Fog
+          </button>
+        </div>
+
+        <label for="customCondition">Custom yes/no condition</label>
+        <input
+          id="customCondition"
+          type="text"
+          placeholder="Example: Is there a cargo ship crossing left to right?"
+        />
+
+        <h2>3) Run Analysis</h2>
+        <div class="inline-controls">
+          <label for="scanInterval">Auto-scan every</label>
+          <select id="scanInterval">
+            <option value="15">15 sec</option>
+            <option value="30" selected>30 sec</option>
+            <option value="45">45 sec</option>
+          </select>
+        </div>
+
+        <div class="action-grid">
+          <button id="scanOnceBtn" class="primary">Run One-Time Scan</button>
+          <button id="autoScanBtn" class="primary">Start Auto Scan</button>
+          <button id="stopAutoScanBtn" class="warning">Stop Auto Scan</button>
+          <button id="startJobsBtn" class="secondary">Start Trio Monitor Jobs</button>
+          <button id="stopJobsBtn" class="warning">Stop Jobs</button>
+        </div>
+
+        <p class="helper">
+          Tip: keep conditions clear yes/no questions for best trigger accuracy.
+        </p>
+      </section>
+
+      <section class="preview card entrance delay-2">
+        <h2>Live Preview</h2>
+        <div class="video-shell">
+          <iframe
+            id="videoFrame"
+            src=""
+            title="Live stream preview"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+          <p id="previewHint">Paste a YouTube live URL and click “Prepare Preview”.</p>
+        </div>
+      </section>
+
+      <section class="summary card entrance delay-3">
+        <h2>Session Metrics</h2>
+        <div class="metric-grid">
+          <article>
+            <p class="metric-label">Total checks</p>
+            <p id="checksMetric" class="metric-value">0</p>
+          </article>
+          <article>
+            <p class="metric-label">Positive detections</p>
+            <p id="positiveMetric" class="metric-value">0</p>
+          </article>
+          <article>
+            <p class="metric-label">Ship hits</p>
+            <p id="shipMetric" class="metric-value">0</p>
+          </article>
+          <article>
+            <p class="metric-label">Bird hits</p>
+            <p id="birdMetric" class="metric-value">0</p>
+          </article>
+          <article>
+            <p class="metric-label">Avg Trio latency</p>
+            <p id="latencyMetric" class="metric-value">0 ms</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="timeline card entrance delay-4">
+        <div class="title-row">
+          <h2>Detection Timeline</h2>
+          <button id="clearTimelineBtn" class="ghost">Clear</button>
+        </div>
+        <div id="timelineList" class="timeline-list"></div>
+      </section>
+
+      <section class="jobs card entrance delay-5">
+        <h2>Trio Monitoring Jobs</h2>
+        <div id="jobsList" class="jobs-list"></div>
+      </section>
+
+      <section class="status card entrance delay-6">
+        <h2>Activity Log</h2>
+        <pre id="logOutput" class="log-output">Ready.</pre>
+      </section>
+    </main>
+
+    <template id="timelineItemTemplate">
+      <article class="timeline-item">
+        <header>
+          <span class="tag"></span>
+          <span class="timestamp"></span>
+        </header>
+        <p class="condition"></p>
+        <p class="explanation"></p>
+        <footer>
+          <span class="result"></span>
+          <span class="latency"></span>
+        </footer>
+      </article>
+    </template>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
