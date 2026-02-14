@@ -42,7 +42,7 @@ http://127.0.0.1:8787
 - `TRIO_API_KEY` (required)
 - `TRIO_BASE_URL` (optional, defaults to `https://trio.machinefi.com`)
 - `PORT` (optional, defaults to `8787`)
-- `HOST` (optional, defaults to `127.0.0.1`)
+- `HOST` (optional, defaults to `0.0.0.0`)
 
 ## Deploy to Render (Free)
 

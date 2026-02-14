@@ -8,7 +8,7 @@ const publicDir = path.join(cwd, 'public');
 loadDotEnv(path.join(cwd, '.env'));
 
 const PORT = Number(process.env.PORT || 8787);
-const HOST = process.env.HOST || '127.0.0.1';
+const HOST = process.env.HOST || '0.0.0.0';
 const TRIO_BASE_URL = process.env.TRIO_BASE_URL || 'https://trio.machinefi.com';
 const TRIO_API_KEY = process.env.TRIO_API_KEY || '';
 
